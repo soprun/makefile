@@ -26,8 +26,8 @@ GIT_COMMIT_SHA=$(shell git rev-parse HEAD)
 #GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD || echo 'n/a')
 #GIT_REVISION :=	$(shell git rev-parse --short HEAD || echo 'n/a')
 
-# PROJECT_DIR = $(shell cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
-PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+PROJECT_DIR = $(shell cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
+MAKEFILE_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 # Load environment variables from .env
 -include "$(PROJECT_DIR)/.env"
@@ -90,6 +90,7 @@ help: ## Show this help
 
 envs:
 	@echo "PROJECT_DIR:$(PROJECT_DIR)"
+	@echo "MAKEFILE_DIR:$(MAKEFILE_DIR)"
 	@echo "PROJECT_NAME:$(PROJECT_NAME)"
 	@echo "USER_ID:$(USER_ID)"
 	@echo "GROUP_ID:$(GROUP_ID)"
@@ -105,6 +106,6 @@ envs:
 	@echo "GIT_REVISION:$(GIT_REVISION)"
 	@echo "APP_VERSION:$(APP_VERSION)"
 
-include ./makefiles/standard.inc.mk
-include ./makefiles/git.inc.mk
-include ./makefiles/docker.inc.mk
+include $(MAKEFILE_DIR)/makefiles/standard.inc.mk
+include $(MAKEFILE_DIR)/makefiles/git.inc.mk
+include $(MAKEFILE_DIR)/makefiles/docker.inc.mk
