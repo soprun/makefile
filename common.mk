@@ -86,7 +86,7 @@ help: ## Show this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make $(COLOR_YELLOW)<target>$(COLOR_RESET)\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  $(COLOR_GREEN)%-27s$(COLOR_RESET) %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s$(COLOR_RESET)\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
 # include Makefile.local if it exists
-# -include Makefile.local
+-include "$(PROJECT_DIR)/Makefile.local"
 
 envs:
 	@echo "PROJECT_DIR:$(PROJECT_DIR)"
@@ -106,6 +106,6 @@ envs:
 	@echo "GIT_REVISION:$(GIT_REVISION)"
 	@echo "APP_VERSION:$(APP_VERSION)"
 
-include $(MAKEFILE_DIR)/makefiles/standard.inc.mk
-include $(MAKEFILE_DIR)/makefiles/git.inc.mk
-include $(MAKEFILE_DIR)/makefiles/docker.inc.mk
+include "$(MAKEFILE_DIR)/makefiles/standard.inc.mk"
+include "$(MAKEFILE_DIR)/makefiles/git.inc.mk"
+include "$(MAKEFILE_DIR)/makefiles/docker.inc.mk"
