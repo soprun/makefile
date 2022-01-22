@@ -1,3 +1,3 @@
 
-include common.mk
+include init.mk
 
