@@ -105,6 +105,6 @@ envs:
 	@echo "GIT_REVISION:$(GIT_REVISION)"
 	@echo "APP_VERSION:$(APP_VERSION)"
 
-include standard.inc.mk
-include git.inc.mk
-include docker.inc.mk
+include ./makefiles/standard.inc.mk
+include ./makefiles/git.inc.mk
+include ./makefiles/docker.inc.mk
